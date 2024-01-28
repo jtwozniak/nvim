@@ -3,16 +3,25 @@ vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to de
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+local nmap = function(keys, func, desc)
+    vim.keymap.set('n', keys, func, { desc = desc })
+end
+
+
 
 return {
     'kevinhwang91/nvim-ufo',
     dependencies = {
         'kevinhwang91/promise-async',
+        'neoclide/coc.nvim'
     },
     config = function()
         -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-        vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-        vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+        nmap('ma', require('ufo').openAllFolds, "open all folds")
+        nmap('md', require('ufo').closeAllFolds, "close all folds")
+        nmap('mc', "<cmd>foldclose<CR>", "open fold")
+        nmap('mo', "<cmd>foldopen<CR>", "close fold")
+
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities.textDocument.foldingRange = {
@@ -26,7 +35,17 @@ return {
                 -- you can add other fields for setting up lsp server in this table
             })
         end
-        require('ufo').setup()
+        vim.keymap.set('n', 'mk', function()
+            local bufnr = vim.api.nvim_get_current_buf()
+            local winid = require('ufo').peekFoldedLinesUnderCursor(bufnr)
+            if not winid then
+                vim.lsp.buf.hover()
+            end
+        end)
+
+        require('ufo').setup({
+            provider_selector = function() return { 'lsp', 'indent' } end,
+        })
     end,
 
 }

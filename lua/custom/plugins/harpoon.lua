@@ -9,19 +9,19 @@ return {
 		vim.keymap.set('n', "<leader>ap", ui.nav_prev)
 		vim.keymap.set('n', "<leader>an", ui.nav_next)
 
-		vim.keymap.set('n', "<C-n>", function()
-			ui.nav_file(1)
-		end)
-		vim.keymap.set('n', "<C-m>", function()
-			ui.nav_file(2)
-		end)
-
-		vim.keymap.set('n', "<C-,>", function()
-			ui.nav_file(3)
-		end)
-
-		vim.keymap.set('n', "<C-.>", function()
-			ui.nav_file(4)
-		end)
+		-- vim.keymap.set('n', "<C-n>", function()
+		-- 	ui.nav_file(1)
+		-- end)
+		-- vim.keymap.set('n', "<C-m>", function()
+		-- 	ui.nav_file(2)
+		-- end)
+		--
+		-- vim.keymap.set('n', "<C-,>", function()
+		-- 	ui.nav_file(3)
+		-- end)
+		--
+		-- vim.keymap.set('n', "<C-.>", function()
+		-- 	ui.nav_file(4)
+		-- end)
 	end,
 }

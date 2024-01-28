@@ -9,14 +9,14 @@ vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move right' })
 
 vim.keymap.set('n', '<leader>c', '<Cmd>q<CR>', { desc = 'Move right' })
 
-vim.keymap.set('n', '<A-j>', ":m .+1<CR>==")
-vim.keymap.set('n', '<A-k>', ":m .-2<CR>==")
+vim.keymap.set('n', '<A-e>', ":m .+1<CR>==", { desc = "move line up" })
+vim.keymap.set('n', '<A-r>', ":m .-2<CR>==", { desc = "move line down" })
 
-vim.keymap.set('i', '<A-k>', "<Esc>:m .-2<CR>==gi")
-vim.keymap.set('i', '<A-j>', "<Esc>:m .+1<CR>==gi")
+vim.keymap.set('i', '<A-e>', "<Esc>:m .-2<CR>==gi", { desc = "move line up" })
+vim.keymap.set('i', '<A-r>', "<Esc>:m .+1<CR>==gi", { desc = "move line down" })
 
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv-gv")
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv-gv")
+vim.keymap.set('v', '<A-e>', ":m '>+1<CR>gv-gv", { desc = "move line up" })
+vim.keymap.set('v', '<A-r>', ":m '<-2<CR>gv-gv", { desc = "move line down" })
 
 vim.keymap.set('n', 'J', "mzJ`z")
 
