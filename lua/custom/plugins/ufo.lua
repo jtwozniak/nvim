@@ -13,7 +13,7 @@ return {
     'kevinhwang91/nvim-ufo',
     dependencies = {
         'kevinhwang91/promise-async',
-        'neoclide/coc.nvim'
+        -- 'neoclide/coc.nvim'
     },
     config = function()
         -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself

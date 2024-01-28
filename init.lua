@@ -65,8 +65,8 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  'nvim-tree/nvim-tree.lua',
   'nvim-tree/nvim-web-devicons',
+  'nvim-tree/nvim-tree.lua',
 
   -- NOTE: First, some plugins that don't require any configuration
   -- Git related plugins
@@ -286,6 +286,8 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+-- require("telescope").load_extension("git_worktree")
+
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
