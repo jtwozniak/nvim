@@ -34,16 +34,16 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.showtabline = 2
 
-function my_tabline()
-    local s = ''
-    for i = 1, vim.fn.tabpagenr('$') do
-        local bufnr = vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]
-        local bufname = vim.fn.fnamemodify(vim.fn.bufname(bufnr), ':p')
-        s = s .. '%' .. i .. 'T' .. (bufnr == vim.fn.bufnr('%') and '%1*' or '%2*') .. bufname .. ' '
-    end
-    return s
-end
+-- function my_tabline()
+--     local s = ''
+--     for i = 1, vim.fn.tabpagenr('$') do
+--         local bufnr = vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]
+--         local bufname = vim.fn.fnamemodify(vim.fn.bufname(bufnr), ':p')
+--         s = s .. '%' .. i .. 'T' .. (bufnr == vim.fn.bufnr('%') and '%1*' or '%2*') .. bufname .. ' '
+--     end
+--     return s
+-- end
 
-vim.o.tabline = [[%!v:lua.my_tabline()]]
+-- vim.o.tabline = [[%!v:lua.my_tabline()]]
 
 return {}

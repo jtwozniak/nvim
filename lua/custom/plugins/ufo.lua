@@ -22,28 +22,6 @@ return {
         nmap('md', require('ufo').closeAllFolds, "close all folds")
         nmap('mc', "<cmd>foldclose<CR>", "open fold")
         nmap('mo', "<cmd>foldopen<CR>", "close fold")
-
-
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true
-        }
-        local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-        for _, ls in ipairs(language_servers) do
-            require('lspconfig')[ls].setup({
-                capabilities = capabilities
-                -- you can add other fields for setting up lsp server in this table
-            })
-        end
-        vim.keymap.set('n', 'mk', function()
-            local bufnr = vim.api.nvim_get_current_buf()
-            local winid = require('ufo').peekFoldedLinesUnderCursor(bufnr)
-            if not winid then
-                vim.lsp.buf.hover()
-            end
-        end)
-
         require('ufo').setup({
             provider_selector = function() return { 'lsp', 'indent' } end,
         })

@@ -1,5 +1,3 @@
--- autoformat.lua
---
 -- Use your language server to automatically format your code on save.
 -- Adds additional commands as well to manage the behavior
 
@@ -59,7 +57,6 @@ return {
                     return
                 end
 
-                print("client name: " .. client.name)
                 -- Tsserver usually works poorly. Sorry you work with bad languages
                 -- You can remove this line if you know what you're doing :)
                 if client.name == 'tsserver' then
