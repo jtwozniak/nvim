@@ -28,16 +28,16 @@ function folder_search(bufnr)
     )
 end
 
--- function NvimTreeWidth()
---     local winwidth = vim.fn.winwidth(0)
---     if winwidth <= 100 then
---         return 30
---     elseif winwidth <= 200 then
---         return 40
---     else
---         return 50
---     end
--- end
+function NvimTreeWidth()
+    local winwidth = vim.fn.winwidth(0)
+    if winwidth <= 100 then
+        return 30
+    elseif winwidth <= 200 then
+        return 40
+    else
+        return 50
+    end
+end
 
 return {
     'nvim-tree/nvim-tree.lua',
@@ -61,9 +61,9 @@ return {
         select_prompts = false,
         view = {
             -- adaptive_size = true,
-            centralize_selection = true,
-            -- width = NvimTreeWidth(),
-            width = { max = "35%" },
+            -- centralize_selection = true,
+            -- width = { max = "35%" },
+            width = NvimTreeWidth(),
             side = "left",
             preserve_window_proportions = true,
             number = false,
@@ -110,7 +110,7 @@ return {
         update_focused_file = {
             enable = true,
             debounce_delay = 15,
-            update_root = true,
+            update_root = false,
             ignore_list = {},
         },
         -- diagnostics = {

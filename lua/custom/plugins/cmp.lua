@@ -1,28 +1,33 @@
 return {
-    "hrsh7th/nvim-cmp",
+    'hrsh7th/nvim-cmp',
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-emoji",
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "L3MON4D3/LuaSnip",
-        'rafamadriz/friendly-snippets',
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+        'hrsh7th/cmp-nvim-lsp',
+        'honza/vim-snippets',
+        -- 'rafamadriz/friendly-snippets',
+        'hrsh7th/cmp-emoji',
     },
 
     config = function()
         local cmp = require 'cmp'
         local luasnip = require 'luasnip'
-        require('luasnip.loaders.from_vscode').lazy_load()
         luasnip.config.setup {}
+        -- require('luasnip.loaders.from_vscode').lazy_load()
+        require("luasnip.loaders.from_snipmate").lazy_load()
 
-        vim.opt.spell = true
-        vim.opt.spelllang = { 'en_us' }
+
 
         cmp.setup({
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
                 end,
+            },
+            sources = {
+                { name = "nvim_lsp" },
+                { name = "emoji" },
+                { name = "luasnip" },
             },
             mapping = cmp.mapping.preset.insert {
                 ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -53,21 +58,7 @@ return {
                     end
                 end, { 'i', 's' }),
             },
-            sources = {
-                { name = "nvim_lsp" },
-                { name = "emoji" },
-                { name = "luasnip" },
-                { name = "nvim_lua" },
-                {
-                    name = 'spell',
-                    option = {
-                        keep_all_entries = false,
-                        enable_in_context = function()
-                            return true
-                        end,
-                    },
-                },
-            },
         })
     end
+
 }

@@ -4,18 +4,22 @@
 -- Adds additional commands as well to manage the behavior
 
 -- DISABLED BY ME
+function Organize_imports()
+    local params = {
+        command = "_typescript.organizeImports",
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = ""
+    }
+
+    vim.cmd("Neoformat")
+    vim.lsp.buf.execute_command(params)
+end
+
 return {
     'neovim/nvim-lspconfig',
     dependencies = {
-        pririty = -10,
-        -- Automatically install LSPs to stdpath for neovim
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
-
-        -- Useful status updates for LSP
-        -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
         { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-
+        "sbdchd/neoformat"
     },
     config = function()
         -- Switch for controlling whether you want autoformatting.
@@ -23,7 +27,6 @@ return {
         local format_is_enabled = true
         vim.api.nvim_create_user_command('KickstartFormatToggle', function()
             format_is_enabled = not format_is_enabled
-            print('Setting autoformatting to: ' .. tostring(format_is_enabled))
         end, {})
 
         -- Create an augroup that is used for managing our formatting autocmds.
@@ -56,12 +59,17 @@ return {
                     return
                 end
 
+                print("client name: " .. client.name)
                 -- Tsserver usually works poorly. Sorry you work with bad languages
                 -- You can remove this line if you know what you're doing :)
                 if client.name == 'tsserver' then
-                    print('tsserver is not supported for autoformatting')
                     return
                 end
+                if client.name == 'eslint-lsp' then
+                    return
+                end
+
+
 
                 -- Create an autocmd that will run *before* we save the buffer.
                 --  Run the formatting command for the LSP that has just attached.
@@ -69,6 +77,7 @@ return {
                     group = get_augroup(client),
                     buffer = bufnr,
                     callback = function()
+                        print("formatting")
                         if not format_is_enabled then
                             return
                         end
