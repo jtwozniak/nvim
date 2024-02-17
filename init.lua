@@ -14,6 +14,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+vim.g.loaded_netrw       = 1
+vim.g.loaded_netrwPlugin = 1
+
+
 require('lazy').setup({
   'nvim-tree/nvim-web-devicons',
   'nvim-tree/nvim-tree.lua',
@@ -22,7 +27,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   'tpope/vim-sleuth',
-  'github/copilot.vim',
+  -- 'github/copilot.vim',
   'ap/vim-css-color',
 
   { 'folke/which-key.nvim',  opts = {} },
@@ -108,7 +113,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -117,7 +122,14 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
-}, {})
+}, {
+  dev = {
+    path = "~/.config/nvim/mine/",
+  },
+})
+
+vim.cmd.colorscheme "catppuccin"
+
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

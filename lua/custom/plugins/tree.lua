@@ -60,12 +60,13 @@ return {
         respect_buf_cwd = false,
         select_prompts = false,
         view = {
-            -- adaptive_size = true,
-            -- centralize_selection = true,
-            -- width = { max = "35%" },
-            width = NvimTreeWidth(),
+            adaptive_size = true,
+            centralize_selection = true,
+            width = {
+                max = 50,
+            },
             side = "left",
-            preserve_window_proportions = true,
+            preserve_window_proportions = false,
             number = false,
             relativenumber = false,
             signcolumn = "yes",
@@ -110,7 +111,7 @@ return {
         update_focused_file = {
             enable = true,
             debounce_delay = 15,
-            update_root = false,
+            update_root = true,
             ignore_list = {},
         },
         -- diagnostics = {
@@ -147,7 +148,7 @@ return {
             ignore = false,
             show_on_dirs = true,
             show_on_open_dirs = true,
-            timeout = 400,
+            timeout = 200,
         },
         actions = {
             use_system_clipboard = true,
