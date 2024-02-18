@@ -43,13 +43,26 @@ function print_meetings(arg)
   )
 end
 
-local function stringToTimestamp(dateTimeString)
+local function toTimestamp(date, time)
+  local start_time_str = date .. ' at ' .. time
   local pattern = "(%d+)-(%d+)-(%d+) at (%d+):(%d+):(%d+)"
-  local year, month, day, hour, min, sec = dateTimeString:match(pattern)
-  if (year == nil) then
+  local year, month, day, hour, min, sec = start_time_str:match(pattern)
+  return os.time({ year = year, month = month, day = day, hour = hour, min = min, sec = sec })
+end
+
+local function stringToTimestamp(dateTimeString)
+  -- Extracting start and end times from the string
+  local date_str = dateTimeString:match("(.+) at")
+  local start_time_str = dateTimeString:match("at (.+) %-")
+  local end_time_str = dateTimeString:match("- (.+)$")
+  if (start_time_str == nil) then
     return nil
   end
-  return os.time({ year = year, month = month, day = day, hour = hour, min = min, sec = sec })
+
+  return {
+    start = toTimestamp(date_str, start_time_str),
+    stop = toTimestamp(date_str, end_time_str)
+  }
 end
 
 -- Function to split lines and extract title and timestamp
@@ -61,6 +74,7 @@ function M.parse_input(input)
     if #line > 0 then
       if line:match("%d%d%d%d%-%d%d%-%d%d") then -- Check if the line contains a date
         currentEvent.timestamp = stringToTimestamp(line)
+        currentEvent.timeline = line
         if (currentEvent.timestamp ~= nil) then
           table.insert(events, currentEvent)
         end
@@ -88,48 +102,83 @@ end
 
 function M.diff_in_seconds(timestamp)
   local current = os.time()
-  return timestamp - current
+  return {
+    start = timestamp.start - current,
+    stop = timestamp.stop - current
+  }
 end
 
 function M.format_seconds(seconds)
   return 'in ' .. M.secondsToTime(seconds)
 end
 
-function parsed_meetings(start, arg)
+function format_event(event)
+  local secondsTo = M.diff_in_seconds(event.timestamp)
+  local when = ""
+  if (secondsTo.start < 5) then
+    when = 'Now!'
+  elseif (secondsTo.start < 300) then
+    when = 'in less then 5 minutes'
+  else
+    when = M.format_seconds(secondsTo.start)
+  end
+
+  return "\n" .. event.title ..
+      "\n\t" .. event.timeline .. "\n\t" .. when
+end
+
+function event_action(event, startJob)
+  local secondsTo = M.diff_in_seconds(event.timestamp)
+  -- print(vim.inspect(secondsTo))
+  -- print(vim.inspect(event))
+
+  if (secondsTo.start > 0) then
+    if (startJob) then
+      local halfTime = secondsTo.start / 2;
+      local meetingTimeout = timeout
+      if (halfTime < 300) then
+        halfTime = secondsTo.start - 300
+      end
+      if (halfTime < 0) then
+        halfTime = secondsTo.start
+        meetingTimeout = 1000 * halfTime
+      end
+      vim.notify(
+        format_event(event) .. "\nNext reminder:" .. M.format_seconds(halfTime),
+        'warn',
+        { title = "Meeting", timeout = meetingTimeout })
+
+      M.setTimeout(halfTime * 1000, function() event_action(event, startJob) end)
+    else
+      vim.notify(format_event(event), 'warn',
+        { title = "Meeting", timeout = timeout })
+    end
+  elseif (secondsTo.stop > 0) then
+    vim.notify(format_event(event), 'warn',
+      { title = "Meeting", timeout = secondsTo.stop * 1000 })
+  end
+end
+
+function parsed_meetings(startJob, arg)
   local command =
-  'icalBuddy -nc -ps "|\n|" -b "" -tf "%H:%M:%S" -df "%Y-%m-%d" -eed -nrd -iep "title,datetime" eventsToday'
+  'icalBuddy -nc -ps "|\n|" -b "" -tf "%H:%M:%S" -df "%Y-%m-%d" -nrd -iep "title,datetime" eventsToday'
   if (arg ~= nil) then
     command = command .. "+" .. arg
   end
 
-  print_meetings(arg)
   M.execute_command(
     { "-c", command },
     function(data)
-      local smallestTimestamp = 0
-
       local parsedEvents = M.parse_input(data)
       for _, event in ipairs(parsedEvents) do
-        local secondsTo = M.diff_in_seconds(event.timestamp)
-
-        vim.notify("\n" .. event.title .. "\n" .. M.format_seconds(secondsTo), 'warn',
-          { title = "Meeting", timeout = timeout })
-
-        if (smallestTimestamp == 0 or smallestTimestamp >= secondsTo) then
-          smallestTimestamp = secondsTo
-        end
-      end
-
-      if (smallestTimestamp ~= 0) then
-        local halfTime = smallestTimestamp / 2;
-        if (start) then
-          M.setTimeout(halfTime * 1000, parsed_meetings)
-          vim.notify("\n" .. "Next notification" .. "\n" .. M.format_seconds(halfTime), 'warn',
-            { title = "Meeting", timeout = timeout })
-        end
+        event_action(event, startJob);
       end
     end
   )
+end
+
+function parsed_meetings_command(arg)
+  parsed_meetings(false, arg)
 end
 
 -- Creating a simple setInterval wrapper
@@ -147,7 +196,7 @@ function M.setup(user_config)
   parsed_meetings(true, 1)
   vim.cmd [[
       command! -nargs=? ShowMeetings lua print_meetings(<f-args>)
-      command! -nargs=? ShowParsed lua parsed_meetings(nil, <f-args>)
+      command! -nargs=? ShowParsed lua parsed_meetings_command(<f-args>)
     ]]
 end
 
