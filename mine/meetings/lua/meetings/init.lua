@@ -144,7 +144,7 @@ function event_action(event, startJob)
         meetingTimeout = 1000 * halfTime
       end
       vim.notify(
-        format_event(event) .. "\nNext reminder:" .. M.format_seconds(halfTime),
+        format_event(event),
         'warn',
         { title = "Meeting", timeout = meetingTimeout })
 

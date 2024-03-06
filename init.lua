@@ -27,7 +27,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   'tpope/vim-sleuth',
-  -- 'github/copilot.vim',
+  'github/copilot.vim',
   'ap/vim-css-color',
 
   { 'folke/which-key.nvim',  opts = {} },

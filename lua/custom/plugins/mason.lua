@@ -48,9 +48,16 @@ return {
     },
     config = function()
       require('mason').setup()
+      -- local lspconfig = require 'lspconfig'
+
       local servers = {
         graphql = {
-          filetypes = { "graphql", "typescriptreact", "javascriptreact", "typescript" },
+          -- filetypes = { "graphql", "typescriptreact", "javascriptreact", "typescript" },
+
+          -- root_dir = lspconfig.util.root_pattern(".graphqlconfig", ".graphqlrc", "package.json"),
+          flags = {
+            debounce_text_changes = 150,
+          },
         },
 
         lua_ls = {

@@ -1,5 +1,5 @@
 return {
-  enable = false,
+  enabled = false,
   {
     "folke/noice.nvim",
     dependencies = {
