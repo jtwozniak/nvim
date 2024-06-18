@@ -66,6 +66,7 @@ return {
             telemetry = { enable = false },
           },
         },
+
         tailwindcss = {
           tailwindCSS = {
             experimental = {

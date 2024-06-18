@@ -47,7 +47,7 @@ return {
   opts = {
     on_attach = folder_search,
 
-    auto_reload_on_write = false,
+    auto_reload_on_write = true,
     disable_netrw = false,
     hijack_cursor = false,
     hijack_netrw = true,
@@ -111,8 +111,9 @@ return {
     update_focused_file = {
       enable = true,
       debounce_delay = 15,
-      update_root = true,
+      update_root = false,
       ignore_list = {},
+      -- ignore_list = {},
     },
     -- diagnostics = {
     --     enable = lvim.use_icons,
@@ -224,4 +225,35 @@ return {
       args = {},
     },
   },
+  config = function(obj)
+    require('nvim-tree').setup(obj.opts)
+    -- local api = require("nvim-tree.api")
+    -- local Event = api.events.Event
+    --
+    -- local collapsed = false
+    -- api.events.subscribe(Event.TreeRendered, function(data)
+    --   -- local api = require("nvim-tree.api")
+    --   -- local node = api.get_node_under_cursor()
+    --   local buf = vim.api.nvim_get_current_buf()
+    --   local name = vim.api.nvim_buf_get_name(buf)
+    --   if api.tree.is_tree_buf() == false and string.find(name, "node_modules") == nil then
+    --     if doCollaps == true then
+    --       doCollaps = false
+    --       api.tree.find_file({ buf = "node_modules", open = false, focus = false })
+    --       -- os.execute("sleep " .. tonumber(1))
+    --       -- api.tree.collapse_all(true)
+    --       -- api.tree.reload()
+    --       -- os.execute("sleep " .. tonumber(1))
+    --       --
+    --       -- api.tree.collapse_all(true)
+    --       -- api.tree.reload()
+    --       --
+    --
+    --       print('collapsing',)
+    --     end
+    --   else
+    --     doCollaps = true
+    --   end
+    -- end)
+  end,
 }

@@ -9,14 +9,14 @@ vim.keymap.set('i', '<C-l>', '<Right>', { desc = 'Move right' })
 
 vim.keymap.set('n', '<leader>c', '<Cmd>q<CR>', { desc = 'Move right' })
 
-vim.keymap.set('n', '<A-e>', ":m .+1<CR>==", { desc = "move line up" })
-vim.keymap.set('n', '<A-r>', ":m .-2<CR>==", { desc = "move line down" })
+vim.keymap.set('n', 'Ż', ":m .-2<CR>==", { desc = "move line up" })
+vim.keymap.set('n', '∆', ":m .+1<CR>==", { desc = "move line down" })
 
-vim.keymap.set('i', '<A-e>', "<Esc>:m .-2<CR>==gi", { desc = "move line up" })
-vim.keymap.set('i', '<A-r>', "<Esc>:m .+1<CR>==gi", { desc = "move line down" })
+vim.keymap.set('i', 'Ż', "<Esc>:m .-2<CR>==gi", { desc = "move line up" })
+vim.keymap.set('i', '∆', "<Esc>:m .+1<CR>==gi", { desc = "move line down" })
 
-vim.keymap.set('v', '<A-e>', ":m '>+1<CR>gv-gv", { desc = "move line up" })
-vim.keymap.set('v', '<A-r>', ":m '<-2<CR>gv-gv", { desc = "move line down" })
+vim.keymap.set('v', 'Ż', ":m '<-2<CR>gv-gv", { desc = "move line up" })
+vim.keymap.set('v', '∆', ":m '>+1<CR>gv-gv", { desc = "move line down" })
 
 vim.keymap.set('n', 'J', "mzJ`z")
 
@@ -29,6 +29,7 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('x', '<leader>p', "\"_dP")
 
 vim.keymap.set('n', '<leader>gm', '<Cmd>:Gvdiffsplit master<CR>', { desc = "Compare Master" })
+vim.keymap.set('n', '<leader>gv', '<Cmd>:Gvdiffsplit v3<CR>', { desc = "Compare Master" })
 vim.keymap.set('n', '<leader>gl', '<Cmd>G! difftool master<CR>', { desc = "List changed files cmp to master" })
 vim.keymap.set('n', '<leader>gb', '<Cmd>:Gvdiffsplit<CR>', { desc = "Compare current branch" })
 vim.keymap.set('n', '<leader>gc', '<Cmd>Gclog!<CR>', { desc = "commit list" })

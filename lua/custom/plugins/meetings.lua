@@ -1,6 +1,7 @@
 return {
   {
     "janusz/meetings",
+    enabled = false,
     -- dir = "~/.config/nvim/mine/meetings",
     dev = true,
     dependencies = {

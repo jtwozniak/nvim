@@ -48,6 +48,8 @@ require('lazy').setup({
           { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+        vim.keymap.set('n', '<leader>gs', require('gitsigns').toggle_current_line_blame,
+          { buffer = bufnr, desc = '[G] show line' })
       end,
     },
   },
@@ -77,7 +79,7 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-  { "folke/neodev.nvim",     opts = {} },
+  { "fblke/neodev.nvim",     opts = {} },
 
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -86,6 +88,7 @@ require('lazy').setup({
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'BurntSushi/ripgrep',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
       -- requirements installed.
@@ -239,7 +242,7 @@ require('nvim-treesitter.configs').setup {
     'markdown', 'bash', 'html', 'css', 'fennel' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
+  auto_install = true,
 
   highlight = { enable = true },
   indent = { enable = true },
