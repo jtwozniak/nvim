@@ -39,6 +39,12 @@ return {
   {
 
     'williamboman/mason-lspconfig.nvim',
+    opts = {
+      ensure_installed = {
+        "eslint@4.8.0",
+        "vscode-eslint@4.8.0",
+      },
+    },
     dependencies = {
       'williamboman/mason.nvim',
       'neovim/nvim-lspconfig',
@@ -65,6 +71,18 @@ return {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
           },
+        },
+
+        eslint = {
+          settings = {
+            { lint = { enable = true } },
+            { workingDirecotry = { mode = 'auto' } }
+          }
+        },
+
+        prettier = {
+          filetypes = { "graphql", "typescriptreact", "javascriptreact", "typescript" },
+
         },
 
         tailwindcss = {

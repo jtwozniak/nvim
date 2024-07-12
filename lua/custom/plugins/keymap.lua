@@ -28,10 +28,11 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 
 vim.keymap.set('x', '<leader>p', "\"_dP")
 
-vim.keymap.set('n', '<leader>gm', '<Cmd>:Gvdiffsplit master<CR>', { desc = "Compare Master" })
-vim.keymap.set('n', '<leader>gv', '<Cmd>:Gvdiffsplit v3<CR>', { desc = "Compare Master" })
-vim.keymap.set('n', '<leader>gl', '<Cmd>G! difftool master<CR>', { desc = "List changed files cmp to master" })
+vim.keymap.set('n', '<leader>gm', '<Cmd>:Gvdiffsplit main<CR>', { desc = "Compare Master" })
+-- vim.keymap.set('n', '<leader>gv', '<Cmd>:Gvdiffsplit v3<CR>', { desc = "Compare Master" })
+vim.keymap.set('n', '<leader>gl', '<Cmd>G! difftool main<CR>', { desc = "List changed files cmp to master" })
 vim.keymap.set('n', '<leader>gb', '<Cmd>:Gvdiffsplit<CR>', { desc = "Compare current branch" })
 vim.keymap.set('n', '<leader>gc', '<Cmd>Gclog!<CR>', { desc = "commit list" })
+vim.keymap.set('n', '<leader>gx', '<Cmd>Gclog! --follow %<CR>', { desc = "commit list" })
 
 return {}

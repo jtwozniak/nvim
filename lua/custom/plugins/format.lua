@@ -1,5 +1,5 @@
-vim.g.neoformat_try_node_exe = 1
-
+-- vim.g.neoformat_try_node_exe = 1
+--
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.json", "*.graphql", "*.jsonc", "*.js", "*.ts", "*.tsx", "*.jsx" },
   command = "Neoformat",
@@ -15,8 +15,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.keymap.set('n', '<leader>fo', '<cmd>Neoformat<cr>', { noremap = true, silent = false })
 
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   pattern = { "*.json", "*.graphql", "*.jsonc", "*.js", "*.ts", "*.tsx", "*.jsx" },
+--   command = "Neoformat",
+-- })
+
 
 
 return {
   "sbdchd/neoformat",
+  -- "mhartington/formatter.nvim",
 }
