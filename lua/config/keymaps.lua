@@ -27,3 +27,27 @@ vim.keymap.set("n", "<leader>gb", "<Cmd>:Gvdiffsplit<CR>", { desc = "Compare cur
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 
 -- Windows wsl mapping
+-- vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Write file" })
+--
+-- vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
+-- vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
+--
+-- vim.keymap.set("n", "<leader>z", "<Cmd>q<CR>", { desc = "Move right" })
+--
+-- vim.keymap.set("n", "Ż", ":m .-2<CR>==", { desc = "move line up" })
+-- vim.keymap.set("n", "∆", ":m .+1<CR>==", { desc = "move line down" })
+--
+-- vim.keymap.set("i", "Ż", "<Esc>:m .-2<CR>==gi", { desc = "move line up" })
+-- vim.keymap.set("i", "∆", "<Esc>:m .+1<CR>==gi", { desc = "move line down" })
+--
+-- vim.keymap.set("v", "Ż", ":m '<-2<CR>gv-gv", { desc = "move line up" })
+-- vim.keymap.set("v", "∆", ":m '>+1<CR>gv-gv", { desc = "move line down" })
+--
+-- vim.keymap.set("n", "<leader>gm", "<Cmd>:Gvdiffsplit develop<CR>", { desc = "Compare Master" })
+-- vim.keymap.set("n", "<leader>gb", "<Cmd>:Gvdiffsplit<CR>", { desc = "Compare current branch" })
+-- vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+--
+-- -- Map the new key to the function
+-- vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
+-- vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
+-- vim.keymap.set("n", "<leader>lc", vim.lsp.codelens.run, { desc = "Code lens" })
