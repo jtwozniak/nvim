@@ -1,8 +1,9 @@
 return {
   "neovim/nvim-lspconfig",
-  opts = {
-    inlay_hints = { enabled = false },
-    setup = {
+  opts = function(_, opts)
+    opts.inlay_hints = { enabled = false, focusable = true }
+
+    opts.setup = {
       tailwindcss = function(_, opts)
         opts.filetypes = opts.filetypes or {}
 
@@ -11,8 +12,6 @@ return {
           tailwindCSS = {
             experimental = {
               classRegex = {
-                -- { "cva\\(([^]*)\\)\\;", "[\"'`]([^\"'`]*).*?[\"'`]" },
-                -- { "twMerge\\(([^]*)\\)\\;", "/home/jtwozniak/w/m/apps/components/src/icons[\"'`]([^\"'`]*).*?[\"'`]" },
                 { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
                 { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
                 { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
@@ -21,6 +20,6 @@ return {
           },
         }
       end,
-    },
-  },
+    }
+  end,
 }

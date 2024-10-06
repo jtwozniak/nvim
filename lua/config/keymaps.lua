@@ -8,7 +8,7 @@ vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
 vim.keymap.set("n", "<leader>z", "<Cmd>q<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Write buffer" })
 
--- Alt or cmd  + j/k for movin multiple lines
+-- Alt or cmd  + j/k for moving selected lines
 vim.keymap.set("n", "Ż", ":m .-2<CR>==", { desc = "move line up" })
 vim.keymap.set("n", "∆", ":m .+1<CR>==", { desc = "move line down" })
 
