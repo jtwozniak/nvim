@@ -1,5 +1,5 @@
 return {
-  enabled = false,
+  enabled = true,
   "rcarriga/nvim-notify",
   enabled = true,
   keys = {

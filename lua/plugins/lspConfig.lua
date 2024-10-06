@@ -1,5 +1,9 @@
 return {
   "neovim/nvim-lspconfig",
+  dependencies = {
+    "roobert/tailwindcss-colorizer-cmp.nvim",
+  },
+
   opts = function(_, opts)
     opts.inlay_hints = { enabled = false, focusable = true }
 
