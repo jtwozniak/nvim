@@ -9,6 +9,8 @@ return {
 
     opts.setup = {
       tailwindcss = function(_, opts)
+        local keys = require("lazyvim.plugins.lsp.keymaps").get()
+        keys[#keys + 1] = { "<leader>fl", "<cmd>EslintFixAll<cr>" }
         opts.filetypes = opts.filetypes or {}
 
         -- Additional settings for Phoenix projects
