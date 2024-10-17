@@ -44,12 +44,13 @@ return {
         end,
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
         { name = "snippets" },
+        { name = "nvim_lsp" },
         { name = "emoji" },
         { name = "path" },
       }, {
         { name = "buffer" },
+        { name = "snippets" },
       }),
       formatting = {
         format = function(entry, item)

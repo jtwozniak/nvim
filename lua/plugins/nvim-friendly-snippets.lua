@@ -1,8 +1,8 @@
 return {
   "garymjr/nvim-snippets",
-  -- enabled = false,
+  enabled = false,
   opts = {
     friendly_snippets = true,
   },
-  dependencies = { "rafamadriz/friendly-snippets" },
+  dependencies = { "rafamadriz/friendly-snippets", "nv" },
 }
