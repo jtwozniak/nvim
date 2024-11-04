@@ -2,6 +2,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+local _border = "rounded"
+
 vim.diagnostic.config({
-  float = { border = "rounded" },
+  float = { border = _border },
 })

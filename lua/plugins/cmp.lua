@@ -22,11 +22,16 @@ return {
     local cmp = require("cmp")
     local defaults = require("cmp.config.default")()
     local auto_select = true
+    local cmp_window = require("cmp.config.window")
 
     return {
       auto_brackets = {}, -- configure any filetype to auto add brackets
       completion = {
         completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
+      },
+      window = {
+        completion = cmp_window.bordered(),
+        documentation = cmp_window.bordered(),
       },
       preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
       mapping = cmp.mapping.preset.insert({
