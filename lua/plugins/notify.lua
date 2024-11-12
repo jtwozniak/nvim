@@ -1,7 +1,6 @@
 return {
-  enabled = true,
   "rcarriga/nvim-notify",
-  enabled = true,
+  enabled = false,
   keys = {
     {
       "<leader>un",
