@@ -24,8 +24,6 @@ vim.keymap.set("v", "∆", ":m '>+1<CR>gv-gv", { desc = "move line down" })
 
 vim.keymap.set("n", "<leader>gb", "<Cmd>:Gvdiffsplit<CR>", { desc = "Compare current branch" })
 
-vim.keymap.set("n", "<leader>gm", "<Cmd>:Gvdiffsplit main<CR>", { desc = "Compare Master" })
-
 -- Mac multi project
 -- vim.keymap.set("n", "<leader>gm", "<Cmd>:Gvdiffsplit main<CR>", { desc = "Compare Master" })
 
