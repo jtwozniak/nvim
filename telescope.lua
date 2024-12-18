@@ -56,7 +56,7 @@ return {
     { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
-    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+    { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Dnusaz10n iagnostics" },
     { "<leader>sG", LazyVim.pick("live_grep"), desc = "Grep (Root package)" },
     { "<leader>sg", LazyVim.pick("live_grep", { root = false }), desc = "Grep (root)" },
     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
@@ -74,6 +74,7 @@ return {
     { "<leader>sw", LazyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
     { "<leader>sW", LazyVim.pick("grep_string", { root = false }), mode = "v", desc = "Selection (cwd)" },
     { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
+
     {
       "<leader>ss",
       function()
@@ -161,6 +162,10 @@ return {
         find_files = {
           find_command = find_command,
           hidden = true,
+          theme = "ivy",
+        },
+        live_grep = {
+          theme = "ivy",
         },
       },
     }

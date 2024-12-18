@@ -6,7 +6,7 @@ return {
       {
         "<leader>e",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+          require("neo-tree.command").execute({ toggle = true, position = "right", dir = LazyVim.root() })
         end,
         desc = "Explorer NeoTree (Root Dir)",
       },
@@ -66,6 +66,7 @@ return {
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
       },
+
       window = {
         mappings = {
           ["l"] = "open",
