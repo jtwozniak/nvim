@@ -35,14 +35,8 @@ return {
         -- Additional settings for Phoenix projects
         opts.settings = {
           tailwindCSS = {
-            experimental = {
-              classRegex = {
-                { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-                { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-                { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-                { "twMerge\\(([^]*)\\)\\;", "[\"'`]([^\"'`]*).*?[\"'`]" },
-              },
-            },
+            classAttributes = { "className", ".*ClassName" },
+            classFunctions = { "clsx", "cn", "cva", "twMerge" },
           },
         }
       end,
