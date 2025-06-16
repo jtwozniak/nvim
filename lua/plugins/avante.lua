@@ -11,11 +11,21 @@ return {
     -- openai = {
     --   endpoint = "https://api.deepseek.com/v1",
     --   model = "deepseek-chat",
-    --   timeout = 30000, -- Timeout in milliseconds
+    --   timeout = 3000, -- Timeout in milliseconds
     --   temperature = 0,
     --   max_tokens = 4096,
     --   -- optional
+    --   disable_tools = true, -- disable tools!
     --   api_key_name = "DEEP_SEEK_API_KEY", -- default OPENAI_API_KEY if not set
+    -- },
+    -- claude = {
+    --   endpoint = "https://api.anthropic.com",
+    --   model = "claude/claude-3-7-sonnet-20250219",
+    --   timeout = 3000, -- Timeout in milliseconds
+    --   temperature = 0,
+    --   max_tokens = 4096,
+    --   disable_tools = true, -- disable tools!
+    --   api_key_name = "ANTHROPIC_API_KEY", -- default OPENAI_API_KEY if not set
     -- },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -27,8 +37,9 @@ return {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     --- The below dependencies are optional,
+    "echasnovski/mini.pick", -- for file_selector provider mini.pick
+    "ibhagwan/fzf-lua", -- for file_selector provider fzf
     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    "zbirenbaum/copilot.lua", -- for providers='copilot'
     {
       -- support for image pasting
       "HakonHarnes/img-clip.nvim",
