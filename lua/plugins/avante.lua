@@ -6,8 +6,9 @@ return {
   -- comment options to get claude
   opts = {
     -- add opts here
-    -- provider = "openai",
-    -- auto_suggestions_provider = "openai", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+    provider = "claude",
+    mode = "legacy",
+    auto_suggestions_provider = "gemini", -- Using Gemini for auto-suggestions as it's free
     -- openai = {
     --   endpoint = "https://api.deepseek.com/v1",
     --   model = "deepseek-chat",
@@ -27,6 +28,30 @@ return {
     --   disable_tools = true, -- disable tools!
     --   api_key_name = "ANTHROPIC_API_KEY", -- default OPENAI_API_KEY if not set
     -- },
+    providers = {
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-3-7-sonnet-20250219",
+        -- model = "claude-sonnet-4-20250514",
+        timeout = 30000, -- Timeout in milliseconds
+        disable_tools = true, -- disable tools!
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 4096,
+        },
+      },
+      gemini = {
+        -- endpoint = "https://generativelanguage.googleapis.com",
+        model = "gemini-2.0-flash",
+        timeout = 10000, -- Timeout in milliseconds
+        disable_tools = true, -- disable tools!
+        api_key_name = "GEMINI_API_KEY",
+        extra_request_body = {
+          temperature = 0.2,
+          maxOutputTokens = 1024,
+        },
+      },
+    },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
