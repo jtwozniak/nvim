@@ -16,6 +16,7 @@ return {
     -- end
 
     opts.servers = {
+      graphql = {},
       oxlint = {
         cmd = { "oxc_language_server" },
         filetypes = {
