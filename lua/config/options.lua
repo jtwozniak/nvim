@@ -7,7 +7,8 @@ local _border = "rounded"
 vim.diagnostic.config({
   float = { border = _border },
 })
+vim.g.root_spec = { "cwd" }
 
 vim.g.trouble_lualine = false
 vim.g.snacks_animate = false
-vim.lsp.enable("oxlint")
+vim.g.lazyvim_picker = "snacks"

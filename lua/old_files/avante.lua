@@ -2,12 +2,14 @@ return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   lazy = false,
+  enabled = false,
   version = false, -- set this if you want to always pull the latest change
   -- comment options to get claude
   opts = {
     -- add opts here
     provider = "claude",
     mode = "legacy",
+    enable_fastapply = true,
     auto_suggestions_provider = "gemini", -- Using Gemini for auto-suggestions as it's free
     -- openai = {
     --   endpoint = "https://api.deepseek.com/v1",
@@ -62,7 +64,7 @@ return {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     --- The below dependencies are optional,
-    "echasnovski/mini.pick", -- for file_selector provider mini.pick
+    "nvim-mini/mini.pick", -- for file_selector provider mini.pick
     "ibhagwan/fzf-lua", -- for file_selector provider fzf
     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
     {
