@@ -11,10 +11,6 @@ return {
       vim.notify("Moved from " .. prev_path .. " to " .. path)
       update_on_switch(path, prev_path)
     end)
-
-    Hooks.register(Hooks.type.DELETE, function()
-      vim.cmd(config.update_on_change_command)
-    end)
   end,
   keys = {
     {
@@ -88,7 +84,9 @@ return {
           prompt = "Variable (path and branch suffix):",
         }, function(variable)
           if variable and variable ~= "" then
-            local path = variable
+            -- Get git root directory
+            local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+            local path = git_root .. "/../" .. variable
             local branch = "janusz/" .. variable
             
             -- Fetch latest from origin/develop first
