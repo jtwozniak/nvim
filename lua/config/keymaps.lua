@@ -26,6 +26,10 @@ vim.keymap.set("n", "<leader>gb", "<Cmd>:Gvdiffsplit<CR>", { desc = "Compare cur
 
 vim.keymap.set("n", "<leader>gm", "<Cmd>:Gvdiffsplit develop<CR>", { desc = "Compare Master" })
 
+vim.keymap.set("n", "<leader>gs", function()
+  require("snacks").picker.git_status()
+end, { desc = "Git Status Files" })
+
 -- Mac multi project
 -- vim.keymap.set("n", "<leader>gm", "<Cmd>:Gvdiffsplit main<CR>", { desc = "Compare Master" })
 
