@@ -209,7 +209,27 @@ return {
                   format = "text",
                   confirm = function(picker, item)
                     if item then
-                      require("git-worktree").delete_worktree(item.path)
+                      -- Switch to bare repo before deleting
+                      require("git-worktree").switch_worktree(nil)
+                      
+                      vim.defer_fn(function()
+                        require("git-worktree").delete_worktree(item.path, false, {
+                          on_success = function()
+                            vim.notify("Worktree deleted: " .. item.path, vim.log.levels.INFO)
+                          end,
+                          on_failure = function(e)
+                            local error_msg = e:stderr_result()[1] or "Unknown error"
+                            if error_msg:match("changes would be lost") or error_msg:match("uncommitted changes") then
+                              vim.notify(
+                                "Cannot delete worktree: uncommitted changes in " .. item.path,
+                                vim.log.levels.WARN
+                              )
+                            else
+                              vim.notify("Failed to delete worktree: " .. error_msg, vim.log.levels.ERROR)
+                            end
+                          end,
+                        })
+                      end, 100)
                     end
                     picker:close()
                   end,
