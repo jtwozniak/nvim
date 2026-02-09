@@ -8,6 +8,11 @@ return {
     inlay_hints = { enabled = false, focusable = true },
 
     servers = {
+      ["*"] = {
+        keys = {
+          { "gr", false }, -- Disable default gr mapping
+        },
+      },
       -- tsgo = {
       --   -- keys = { { "<leader>fl", "<cmd>LspEslintFixAll<cr><cmd>OxcFixAll<cr>", "Lint fix" } },
       --   enabled = true,
