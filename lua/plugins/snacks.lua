@@ -25,8 +25,6 @@ return {
             return
           end
 
-          vim.notify("Total refs: " .. #result, vim.log.levels.INFO)
-
           -- Filter out test files and imports
           local filtered = {}
           for _, item in ipairs(result) do
@@ -56,13 +54,9 @@ return {
                 end
               end
               
-              vim.notify("Line text: [" .. line_text .. "]", vim.log.levels.INFO)
-              
               local trimmed = line_text:match("^%s*(.-)%s*$") or line_text
-              vim.notify("Trimmed: [" .. trimmed .. "]", vim.log.levels.INFO)
               
               -- Check if this line is part of an import statement
-              -- Look for patterns that indicate imports
               local is_import = false
               
               -- Direct import patterns
@@ -76,15 +70,11 @@ return {
                 is_import = true
               end
               
-              vim.notify("Is import: " .. tostring(is_import), vim.log.levels.INFO)
-              
               if not is_import then
                 table.insert(filtered, item)
               end
             end
           end
-
-          vim.notify("Filtered refs: " .. #filtered, vim.log.levels.INFO)
 
           if #filtered == 0 then
             vim.notify("No non-import references found", vim.log.levels.INFO)
