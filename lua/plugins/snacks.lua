@@ -17,96 +17,32 @@ return {
     {
       "gr",
       function()
-        local params = vim.lsp.util.make_position_params()
-        params.context = { includeDeclaration = false }
-        vim.lsp.buf_request(0, "textDocument/references", params, function(err, result, ctx, config)
-          if err or not result or #result == 0 then
-            vim.notify("No references found", vim.log.levels.INFO)
-            return
-          end
+        Snacks.picker.lsp_references({
+          include_declaration = false,
+          auto_confirm = true, -- Jumps automatically if only 1 item remains
+          jump = { reuse_win = true },
 
-          -- Filter out test files and imports
-          local filtered = {}
-          for _, item in ipairs(result) do
-            local uri = item.uri or item.targetUri
-            local file = vim.uri_to_fname(uri)
-            local is_test = file:match("%.test%.") or file:match("%.spec%.")
-            
-            if not is_test then
-              -- Get the text at the reference location
-              local bufnr = vim.uri_to_bufnr(uri)
-              local line_text = ""
-              if vim.api.nvim_buf_is_loaded(bufnr) then
-                line_text = vim.api.nvim_buf_get_lines(bufnr, item.range.start.line, item.range.start.line + 1, false)[1] or ""
-              else
-                -- Read from file if buffer not loaded
-                local f = io.open(file, "r")
-                if f then
-                  local line_num = 1
-                  for line in f:lines() do
-                    if line_num == item.range.start.line + 1 then
-                      line_text = line
-                      break
-                    end
-                    line_num = line_num + 1
-                  end
-                  f:close()
-                end
-              end
-              
-              local trimmed = line_text:match("^%s*(.-)%s*$") or line_text
-              
-              -- Check if this line is part of an import statement
-              local is_import = false
-              
-              -- Direct import patterns
-              if trimmed:match("^import%s") or trimmed:match("^import{") or trimmed:match("^import%(") then
-                is_import = true
-              end
-              
-              -- Check if line contains comma after identifier (destructured import pattern)
-              -- AND doesn't contain operators or function calls
-              if trimmed:match("^[%w_]+%s*,") and not trimmed:match("[%(%):]") then
-                is_import = true
-              end
-              
-              if not is_import then
-                table.insert(filtered, item)
-              end
+          -- 'transform' is called for every item. Return false to drop it.
+          transform = function(item)
+            -- 1. Skip test files
+            local file = item.file or vim.uri_to_fname(item.uri)
+            if file:match("%.test%.") or file:match("%.spec%.") then
+              return false
             end
-          end
 
-          if #filtered == 0 then
-            vim.notify("No non-import references found", vim.log.levels.INFO)
-          elseif #filtered == 1 then
-            -- Jump directly to the single reference
-            vim.lsp.util.jump_to_location(filtered[1], "utf-8")
-          else
-            -- Open picker with multiple references
-            Snacks.picker.lsp_references({
-              include_declaration = false,
-              transform = function(item, ctx)
-                if item.file then
-                  local is_test = item.file:match("%.test%.") or item.file:match("%.spec%.")
-                  if is_test then
-                    return false
-                  end
-                end
-                if item.text then
-                  local trimmed = item.text:match("^%s*(.-)%s*$") or item.text
-                  if trimmed:match("^import%s") or trimmed:match("^import{") or trimmed:match("^import%(") then
-                    return false
-                  end
-                end
-                return item
-              end,
-            })
-          end
-        end)
+            -- 2. Skip import lines
+            local text = item.text or ""
+            local trimmed = text:match("^%s*(.-)%s*$") or ""
+
+            local is_import = trimmed:match("^import[%s{(]")
+              or trimmed:match("from%s+['\"]")
+              or (trimmed:match("^[%w_]+%s*,?$") and not (trimmed:match("=") or trimmed:match("%(")))
+
+            return not is_import and item or false
+          end,
+        })
       end,
-      desc = "References (no tests/imports)",
-      mode = "n",
-      nowait = true,
+      desc = "Smart References",
     },
     {
       "gt",
