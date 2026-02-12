@@ -1,6 +1,8 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    profiler = { enabled = false },
+    notifier = { enabled = true },
     picker = {
       sources = {
         explorer = {
