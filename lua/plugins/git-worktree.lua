@@ -94,7 +94,6 @@ return {
             -- Get absolute path and strip /.git to get root
             git_root = vim.fn.fnamemodify(git_root, ":p")
 
-            vim.notify("Git root:" .. git_root, vim.log.levels.INFO)
             vim.notify("Fetching remote branches...", vim.log.levels.INFO)
             vim.fn.system("git fetch origin")
 
@@ -105,21 +104,18 @@ return {
             local path, branch, base_branch, is_remote
 
             if remote_branch_plain then
-              -- Case 1: Branch exists on remote without prefix
               path = git_root .. variable
               branch = variable
               base_branch = "origin/" .. variable
               is_remote = true
               vim.notify("Checking out existing branch: " .. variable, vim.log.levels.INFO)
             elseif remote_branch_janusz then
-              -- Case 2: Branch exists with janusz/ prefix - create worktree without prefix
               path = git_root .. variable
               branch = "janusz/" .. variable
               base_branch = "origin/janusz/" .. variable
               is_remote = true
               vim.notify("Checking out existing branch: janusz/" .. variable, vim.log.levels.INFO)
             else
-              -- Case 3: Branch doesn't exist - create new with janusz/ prefix
               path = git_root .. variable
               branch = "janusz/" .. variable
               base_branch = "origin/develop"
@@ -127,23 +123,29 @@ return {
               vim.notify("Creating new branch: janusz/" .. variable, vim.log.levels.INFO)
             end
 
-            vim.notify("Creating new worktree: " .. path .. " " .. branch .. " " .. base_branch, vim.log.levels.INFO)
-            require("git-worktree").create_worktree(path, branch, base_branch)
+            -- Use synchronous git command (plenary.Job CWD can desync with lcd/tcd)
+            local cmd = "git worktree add -b " .. branch .. " " .. vim.fn.shellescape(path) .. " " .. base_branch
+            local output = vim.fn.system(cmd)
+            if vim.v.shell_error ~= 0 then
+              vim.notify("Failed to create worktree: " .. output, vim.log.levels.ERROR)
+              return
+            end
+            vim.notify("Worktree created: " .. path, vim.log.levels.INFO)
+
+            -- Switch to new worktree
+            require("git-worktree").switch_worktree(path)
 
             -- If it's a remote branch, do git pull --rebase after worktree is created
             if is_remote then
               vim.defer_fn(function()
-                vim.notify("Switching to worktree and running git pull --rebase...", vim.log.levels.INFO)
-                -- Switch directory first
                 vim.cmd("cd " .. vim.fn.fnameescape(path))
-                -- Set upstream and pull rebase explicitly
                 local result = vim.fn.system("git pull --rebase origin " .. branch)
                 if vim.v.shell_error == 0 then
                   vim.notify("Successfully rebased from remote", vim.log.levels.INFO)
                 else
                   vim.notify("Pull rebase failed: " .. result, vim.log.levels.WARN)
                 end
-              end, 1000) -- Wait 1 second for worktree creation to complete
+              end, 1000)
             end
           end
         end)
