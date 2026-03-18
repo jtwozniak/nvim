@@ -28,8 +28,8 @@ return {
       --   root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
       -- },
       oxlint = {
-        -- keys = { { "<leader>fl", "<cmd>LspEslintFixAll<cr><cmd>OxcFixAll<cr>", "Lint fix" } },
-        keys = { { "<leader>fl", "<cmd>LspOxlintFixAll<cr>", "Lint fix" } },
+        keys = { { "<leader>fl", "<cmd>LspEslintFixAll<cr><cmd>OxcFixAll<cr>", "Lint fix" } },
+        -- keys = { { "<leader>fl", "<cmd>LspOxlintFixAll<cr>", "Lint fix" } },
         -- enabled = true,
         -- cmd = { "oxc_language_server" },
         -- filetypes = {
