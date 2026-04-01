@@ -1,0 +1,29 @@
+{
+  "locations": {
+    "/home/jtw": {
+      "tool_approvals": [
+        {
+          "kind": "commands",
+          "commandIdentifiers": [
+            "pnpm lint"
+          ]
+        },
+        {
+          "kind": "commands",
+          "commandIdentifiers": [
+            "pnpm exec",
+            "node"
+          ]
+        },
+        {
+          "kind": "write"
+        },
+        {
+          "kind": "mcp",
+          "serverName": "atlassian",
+          "toolName": "jira_create_issue"
+        }
+      ]
+    }
+  }
+}

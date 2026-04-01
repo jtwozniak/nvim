@@ -13,24 +13,12 @@ return {
           { "gr", false }, -- Disable default gr mapping
         },
       },
-      -- tsgo = {
-      --   -- keys = { { "<leader>fl", "<cmd>LspEslintFixAll<cr><cmd>OxcFixAll<cr>", "Lint fix" } },
-      --   enabled = true,
-      --   cmd = { "tsgo", "--lsp", "--stdio" },
-      --   filetypes = {
-      --     "javascript",
-      --     "javascriptreact",
-      --     "javascript.jsx",
-      --     "typescript",
-      --     "typescriptreact",
-      --     "typescript.tsx",
-      --   },
-      --   root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
-      -- },
-      -- oxfmt = {},
       oxlint = {
         -- keys = { { "<leader>fl", "<cmd>OxcFixAll<cr>", "Lint fix" } },
-        keys = { { "<leader>fl", "<cmd>LspOxlintFixAll<cr>", "Lint fix" } },
+        keys = { { "<leader>fl", "<cmd>LspOxlintFixAll<cr><cmd>!oxfmt %<cr>", "Lint fix" } },
+        -- settings = {
+        --   typeAware = true,
+        -- },
         -- enabled = true,
         -- cmd = { "oxc_language_server" },
         -- filetypes = {

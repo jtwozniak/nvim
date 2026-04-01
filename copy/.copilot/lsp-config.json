@@ -1,0 +1,18 @@
+{
+  "lspServers": {
+    "typescript": {
+      "command": "tsgo",
+      "args": ["--lsp", "--stdio"],
+      "fileExtensions": {
+        ".ts": "typescript",
+        ".tsx": "typescript",
+        ".js": "javascript",
+        ".jsx": "javascript",
+        ".mts": "typescript",
+        ".cts": "typescript",
+        ".mjs": "javascript",
+        ".cjs": "javascript"
+      }
+    }
+  }
+}
