@@ -8,7 +8,7 @@ local nmap = function(keys, func, desc)
 end
 
 return {
-  enabled = false,
+  -- enabled = false,
   "kevinhwang91/nvim-ufo",
   dependencies = {
     "kevinhwang91/promise-async",
