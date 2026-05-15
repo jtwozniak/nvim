@@ -5,7 +5,7 @@ return {
   },
 
   opts = {
-    inlay_hints = { enabled = false, focusable = true },
+    inlay_hints = { enabled = true, focusable = true },
 
     servers = {
       ["*"] = {
@@ -19,17 +19,6 @@ return {
         -- settings = {
         --   typeAware = true,
         -- },
-        -- enabled = true,
-        -- cmd = { "oxc_language_server" },
-        -- filetypes = {
-        --   "javascript",
-        --   "javascriptreact",
-        --   "javascript.jsx",
-        --   "typescript",
-        --   "typescriptreact",
-        --   "typescript.tsx",
-        -- },
-        -- root_markers = { ".oxlintrc.json", "package.json", ".git" },
       },
     },
 

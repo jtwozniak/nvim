@@ -4,6 +4,8 @@
 
 local _border = "rounded"
 
+vim.opt.winborder = _border
+
 vim.diagnostic.config({
   float = { border = _border },
 })
