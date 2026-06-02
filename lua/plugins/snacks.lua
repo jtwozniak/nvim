@@ -1,20 +1,30 @@
 return {
   "folke/snacks.nvim",
-  opts = {
-    profiler = { enabled = false },
-    notifier = { enabled = true },
-    picker = {
-      sources = {
-        explorer = {
-          layout = {
-            layout = {
-              position = "right",
-            },
+  opts = function(_, opts)
+    opts = opts or {}
+    opts.profiler = { enabled = false }
+    opts.notifier = { enabled = true }
+    opts.picker = opts.picker or {}
+    opts.picker.actions = opts.picker.actions or {}
+    opts.picker.actions.copy_relative_path = require("config.snacks").copy_relative_path
+    opts.picker.actions.git_log_dir = require("config.snacks").git_log_dir
+    opts.picker.sources = opts.picker.sources or {}
+    opts.picker.sources.explorer = vim.tbl_deep_extend("force", opts.picker.sources.explorer or {}, {
+      layout = {
+        layout = {
+          position = "right",
+        },
+      },
+      win = {
+        list = {
+          keys = {
+                ["Y"] = { "copy_relative_path", mode = { "n", "x" }, desc = "Copy Relative Path" },
+                ["gf"] = { "git_log_dir", desc = "Git Log (directory)" },
           },
         },
       },
-    },
-  },
+    })
+  end,
   keys = {
     {
       "gr",
