@@ -1,7 +1,0 @@
-[user]
-	email = jtwozniak@gmail.com
-	name = janusz
-[core]
-	editor = nvim
-[pager]
-	branch = false
