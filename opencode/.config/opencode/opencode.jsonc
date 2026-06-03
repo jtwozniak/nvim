@@ -1,0 +1,65 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md",
+    "~/.config/opencode/LEARNINGS.md"
+  ],
+  "enabled_providers": [
+    "github-copilot"
+  ],
+  "model": "github-copilot/gpt-5.5",
+  "small_model": "github-copilot/gpt-5.4-mini",
+  "permission": {
+    "lsp": "allow",
+    "external_directory": {
+      "~/.config/opencode/**": "allow"
+    },
+    "edit": {
+      "~/.config/opencode/MEMORY.md": "allow",
+      "~/.config/opencode/LEARNINGS.md": "allow"
+    }
+  },
+  "lsp": {
+    "oxlint": {
+      "command": [
+        "./node_modules/.bin/oxlint",
+        "--lsp"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".mts",
+        ".cts"
+      ]
+    },
+    "vtsls": {
+      "command": [
+        "~/.local/share/nvim/mason/packages/vtsls/node_modules/.bin/vtsls",
+        "--stdio"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".mts",
+        ".cts"
+      ]
+    }
+  },
+  "plugin": [
+    "opencode-pty",
+    // "@zenobius/opencode-skillful",
+    //"opencode-worktree",
+    // "@tarquinen/opencode-dcp",
+    "opencode-websearch-cited@1.2.0",
+    "@slkiser/opencode-quota",
+    "@tarquinen/opencode-dcp@latest"
+  ]
+}

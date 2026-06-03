@@ -1,0 +1,13 @@
+[user]
+	email = jtwozniak@gmail.com
+	name = janusz
+[core]
+	editor = nvim
+[pager]
+	branch = false
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

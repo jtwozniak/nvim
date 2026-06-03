@@ -1,0 +1,75 @@
+{
+  "mcp": {
+    "atlassian": {
+      "enabled": false,
+      "type": "local",
+      "command": [
+        "uvx",
+        "--python=3.12",
+        "mcp-atlassian"
+      ],
+      "environment": {
+        "JIRA_URL": "https://x.net/",
+        "JIRA_USERNAME": "x@x.com",
+        "JIRA_API_TOKEN": "",
+        "CONFLUENCE_URL": "https://x.net/",
+        "CONFLUENCE_USERNAME": "x@x.com",
+        "CONFLUENCE_API_TOKEN": ""
+      }
+    },
+    "contentful": {
+      "enabled": false,
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@contentful/mcp-server"
+      ],
+      "environment": {
+        "CONTENTFUL_MANAGEMENT_ACCESS_TOKEN": "",
+        "SPACE_ID": "",
+        "ENVIRONMENT_ID": "",
+        "CONTENTFUL_HOST": "api.eu.contentful.com"
+      }
+    },
+    "datadog": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp?toolsets=all"
+    },
+    "figma": {
+      "enabled": false,
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "figma-mcp"
+      ],
+      "environment": {
+        "FIGMA_API_KEY": ""
+      }
+    },
+    "playwright": {
+      "enabled": false,
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "next-devtools": {
+      "enabled": false,
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "next-devtools-mcp@latest"
+      ]
+    },
+    "storybook": {
+      "enabled": false,
+      "type": "remote",
+      "url": "http://localhost:6006/mcp"
+    }
+  }
+}
