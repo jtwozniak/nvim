@@ -10,7 +10,7 @@ ssh-add ~/.ssh/github 2>/dev/null
 alias run='pnpm'
 alias cop='/home/jtw/.local/bin/copilot --model GPT-5.4-xhigh --deny-tool=delete --deny-tool=remove'
 alias gem='pnpm gemini --approval-mode=yolo'
-alias code='OPENCODE_EXPERIMENTAL_LSP_TOOL=true OPENCODE_CONFIG=~/.config/opencode/mcp.json opencode'
+alias code='OPENCODE_EXPERIMENTAL_LSP_TOOL=true OPENCODE_CONFIG=~/.config/opencode/options.jsonc opencode'
 
 # evns 
 # opencode mcp config with secrets

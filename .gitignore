@@ -1,6 +1,7 @@
 fish/.config/fish/secrets.fish
-opencode/.config/opencode/mcp.jsonc
 fish/.config/fish/fish_variables
+opencode/.config/opencode/options.jsonc
+opencode/.config/opencode/INSTRUCTIONS.md
 
 
 

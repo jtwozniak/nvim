@@ -51,30 +51,6 @@
 - If LSP unavailable, stale, or weak, fall back to Glob/Grep/Read.
 - Prefer parallel tool calls when independent.
 
-## TypeScript / React
-
-- Avoid optional props like `value?: Type` when caller can always pass field. Model optionality inside contained value only when real.
-- Omit optional fields instead of returning explicit `undefined` (no `return { blockingScreenKey: undefined }`).
-- For prop-derived client store initialization, prefer `useState(() => initStore(...))` in dedicated wrapper/hook over `useEffect`. More robust, data on first render, no one-render lag.
-- Prefer function declarations for React components. No arrow-function components.
-
-## Repo Rules: /home/jtw/m
-
-- Default branch: `develop`.
-- After code changes, run `pnpm lsd` as default fast verification before handoff.
-- Run `pnpm ta` only for broad changes or explicit final verification request.
-
-## Completion
-
-- Non-trivial task = 3+ changed files, new file, new exported symbol, new dependency, new workflow, or architectural pattern.
-- Before handoff on non-trivial tasks:
-  1. Verify (`pnpm lsd` or relevant tests pass).
-  2. Evaluate learnings (architecture patterns, gotchas, useful commands, domain knowledge).
-  3. Ask user whether new learnings should be appended to `~/.config/opencode/LEARNINGS.md`.
-  4. Only THEN report task complete.
-- Do not duplicate existing `LEARNINGS.md` entries.
-- Steps 2-3 mandatory and automatic. Do not wait for user prompt.
-
 ## Memory
 
 - Keep entries dated and concise.
