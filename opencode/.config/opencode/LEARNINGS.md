@@ -2,6 +2,19 @@
 
 Durable coding-session knowledge. Referenced automatically on start.
 
+## 2026-06-11 - Simplification request handling
+
+- When user asks to optimize, simplify, or reduce code because it “does not look good”, start with deletion-only/minimal-diff approach.
+- Do not add state, callbacks, hooks, new data flow, or preservation plumbing unless user explicitly asks or behavior would clearly break.
+- If a possible edge case appears that requires more code, stop and explain tradeoff before implementing.
+- For simplification work, prove necessity before adding lines; default to preserving current architecture and removing redundancy.
+
+## 2026-06-08 - a repo: Marketing Blueprint schema transforms
+
+- Marketing Blueprint schemas using `richTextSchema` output React nodes; compare against component `*Props` types that widen generated API string fields (`BlueprintBannerProps`, `BlueprintTextAreaProps`, `BlueprintCardLayoutProps`).
+- For Blueprint buttons from marketing CMS, zod transforms should emit the clean generated API shape and preserve `navigationActionSchema` output so required action fields like `openInNewTab` remain present.
+- In modern TypeScript, `Array.filter` can narrow discriminated unions from inline comparisons like `item.__typename === "Button"`; do not add one-off `item is Type` helper functions unless reusable or inference fails.
+
 ## 2026-05-28 - b repo: Transfer-in CTA schema + button quirks
 
 - When bespoke step `data` gains required fields, remove `.default({})` from zod object wrapper or TS/Zod default typing breaks.

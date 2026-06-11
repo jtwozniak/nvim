@@ -16,6 +16,7 @@ alias code='OPENCODE_EXPERIMENTAL_LSP_TOOL=true OPENCODE_CONFIG=~/.config/openco
 # opencode mcp config with secrets
 set -gx OPENCODE_CONFIG .config/opencode/
 set -gx PATH "$HOME/.local/bin" $PATH
+set -gx HUSKY 0
 
 # pnpm
 set -gx PNPM_HOME "~/.local/share/pnpm"
