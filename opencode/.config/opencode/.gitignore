@@ -11,6 +11,10 @@ plugins/
 node_modules/
 .git/
 
+# Runtime sidebar stats
+.headroom-stats.json
+.headroom-stats.json.tmp
+
 
 # Secrets
 .env
