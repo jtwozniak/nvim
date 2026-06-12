@@ -3,8 +3,6 @@ fish/.config/fish/secrets.fish
 opencode/.config/opencode/options.jsonc
 opencode/.config/opencode/INSTRUCTIONS.md
 
-
-
 node_modules
 
 
@@ -16,8 +14,6 @@ sessions/
 *.sqlite-journal
 
 # Installed plugins (managed via npm/git clones)
-plugin/
-plugins/
 node_modules/
 
 

@@ -2,6 +2,13 @@
 
 Durable coding-session knowledge. Referenced automatically on start.
 
+## 2026-06-12 - Context compaction after verification
+
+- After long verification succeeds, send concise final status before extra tool work if context is tight.
+- Compress earlier, before critical context limit; use valid `compress` payload with `topic` and non-empty `content` only.
+- Prefer filtered PTY reads over full-log reads for long commands.
+- If compaction aborts after verification, immediately report that compaction failed and state current task status.
+
 ## 2026-06-11 - Simplification request handling
 
 - When user asks to optimize, simplify, or reduce code because it “does not look good”, start with deletion-only/minimal-diff approach.
