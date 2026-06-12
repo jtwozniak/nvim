@@ -6,8 +6,6 @@ sessions/
 *.sqlite-journal
 
 # Installed plugins (managed via npm/git clones)
-plugin/
-plugins/
 node_modules/
 .git/
 
