@@ -2,9 +2,10 @@ fish/.config/fish/secrets.fish
 # fish/.config/fish/fish_variables
 opencode/.config/opencode/options.jsonc
 opencode/.config/opencode/INSTRUCTIONS.md
+fish/.config/fish/fish_variables
+opencode/.config/opencode/LEARNINGS.md
 
 node_modules
-
 
 # OpenCode runtime and temporary files
 logs/

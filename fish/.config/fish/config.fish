@@ -2,6 +2,11 @@
 
 fish_vi_key_bindings
 
+#macos
+if test -d /opt/homebrew/bin
+    /opt/homebrew/bin/brew shellenv | source
+end
+
 # SSH agent
 eval (ssh-agent -c)
 ssh-add ~/.ssh/github 2>/dev/null
