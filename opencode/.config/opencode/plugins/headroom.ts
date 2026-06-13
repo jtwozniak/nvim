@@ -44,7 +44,7 @@ type HeadroomClientOptions = ConstructorParameters<typeof HeadroomClient>[0] & {
   config?: Record<string, unknown>
 }
 
-const HEADROOM_BASE_URL = "http://127.0.0.1:8787"
+const HEADROOM_BASE_URL = process.env.HEADROOM_BASE_URL ?? "http://127.0.0.1:8787"
 const HEADROOM_STATS_URL = new URL("./headroom-process-stats.json", import.meta.url)
 const HEADROOM_STATS_TMP_URL = new URL("./headroom-process-stats.json.tmp", import.meta.url)
 const headroomStats: HeadroomStats = {

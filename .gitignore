@@ -4,6 +4,7 @@ opencode/.config/opencode/options.jsonc
 opencode/.config/opencode/INSTRUCTIONS.md
 fish/.config/fish/fish_variables
 opencode/.config/opencode/LEARNINGS.md
+opencode/.config/opencode/plugins/headroom-process-stats.json
 
 node_modules
 
